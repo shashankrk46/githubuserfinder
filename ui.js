@@ -36,21 +36,34 @@ class UI{
     }
 
     // show alert
-    showAlert(message,className){
-        // create div
-        const div=document.createElement('div');
-        // add classes
-        div.className=className;
-        // add text
-        div.appendChild(document.createTextNode(message));
-        // get parent
-        const container=document.querySelector('.searchContainer');
-        // search box
-        const search=document.querySelector('.search');
-        // insert alert
-        container.insertBefore(div,search);
-    }
+   showAlert(message,className){
+    //    clear any remaining alerts
+    this.clearAlert();
+    //    create div 
+    const div=document.createElement('div');
+    div.className=className;
+    // add text
+    div.appendChild(document.createTextNode(message));
+    // get parent
+    const container=document.querySelector('.searchContainer');
+    // searchbox
+    const search=document.querySelector('.search');
+    // insert alert
+    container.insertBefore(div,search);
 
+    // timeout after 3 sec
+    setTimeout(()=>{
+        this.clearAlert();
+    },3000);
+   }
+
+    // clear alert message
+    clearAlert(){
+        const currentAlert=document.querySelector('.alert');
+        if(currentAlert){
+            currentAlert.remove();
+        }
+    }
     // clearprofile
     clearProfile(){
         this.profile.innerHTML='';
